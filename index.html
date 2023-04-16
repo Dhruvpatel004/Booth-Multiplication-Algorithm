@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Booth's Multiplication Algorithm</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/logo.png" rel="icon">
+  <link href="assets/logo.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+
+        <h1>Booth's Multiplication Algorithm<span>.</span></h1>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">Algorithm</a></li>
+        </ul>
+      </nav>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+    </div>
+  </header>
+
+  <section id="hero" class="hero d-flex align-items-center section-bg">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div
+          class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+          <h2 data-aos="fade-up">Booth's Multiplication<br> Algorithm</h2>
+          <p data-aos="fade-up" data-aos-delay="100">Booth's multiplication algorithm is a multiplication algorithm that
+            multiplies two signed binary numbers in two's complement notation.</p>
+          <div class="align-items-center justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <form action="">
+              <div class="row">
+                <div class="col-xl-18 ">
+                  <input type="text" name="name" class="form-control" id="n1" placeholder="Enter Multiplicant" required autocomplete="off" >
+                </div>
+              </div>
+              <div class="row" style="margin-top: 5px;">
+                <div class="col-xl-18 form-group">
+                  <input type="text" name="name" class="form-control" id="n2" placeholder="Enter Multiplier" required autocomplete="off">
+                </div>
+
+              </div>
+             
+              <a href="#ans" class="btn-book-a-table" style="margin-top: 5px;" onclick="run()">Claculate</a>
+            </form>
+
+          </div>
+        </div>
+        <div class="col-lg-5 order-2 order-lg-2 text-center text-lg-start">
+          <img src="assets/img/algorithm.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300"
+            height="200px">
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" id="ans" style="display: none;">
+    <div class="section-header">
+      <h1><b><u>Solution</u></b> </h1>
+      <h2><b>Multiplicant : </b><span id="multiplicand"></span></h2>
+      <h2><b>Multiplier : </b> <span id="multiplier"></span></h2>
+      <h2><b>BR : </b><span id="br"></span></h2>
+      <h2><b>BR' (in 2's complement) : </b><span id="br1"></span></h2>
+      <h2><b>QR : </b><span id="qr"></span></h2>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="col-12">
+          <div class="card  overflow-auto" style="overflow-x:auto;">
+
+
+            <table class="table table-border " id="mytable">
+              <thead>
+                <tr>
+                  <th scope="col">Q<sub>n</sub></th>
+                  <th scope="col">Q<sub>n+1</sub></th>
+                  <th scope="col">a</th>
+                  <th scope="col">AC</th>
+                  <th scope="col">QR</th>
+                  <th scope="col">Q<sub>n+1</sub></th>
+                  <th scope="col">SC</th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+                <tr id="mytr" hidden>
+                  <td>0001111000000000000000000</td>
+                  <td>000000000000000</td>
+                  <td>Initial</td>
+                  <td>001111100</td>
+                  <td>00454544554500</td>
+                  <td>0</td>
+                  <td>5</td>
+
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <br>
+    <h3 style="text-align: center;"><b>Result : </b><span style="color: blue;" id="res"></span></h3>
+    <h3 style="text-align: center;"><b>Result in decimal : </b><span style="color: blue;" id="dres"></span></h3>
+
+  </section>
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Algorithm</h2>
+          <p>Learn More About <span>Booth's Multiplication Algorithm</span></p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-7 position-relative about-img"
+            style="background-image: url(assets/img/booth2.png); background-repeat: no-repeat; background-size: contain;"
+            data-aos="fade-up" data-aos-delay="150">
+          </div>
+          <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Booth algorithm gives a procedure for multiplying binary integers in signed 2's complement
+                representation in efficient way, i.e., less number of additions/subtractions required. It operates on
+                the fact that strings of 0's in the multiplier require no addition but just shifting and a string of 1's
+                in the multiplier from bit weight 2^k to weight 2^m can be treated as 2^(k+1 ) to 2^m. As in all
+                multiplication schemes, booth algorithm requires examination of the multiplier bits and shifting of the
+                partial product. Prior to the shifting, the multiplicand may be added to the partial product, subtracted
+                from the partial product, or left unchanged according to following rules:
+              </p>
+              <ul>
+                <li><i class="bi bi-check2-all"></i>The multiplicand is subtracted from the partial product upon
+                  encountering the first least significant 1 in a string of 1's in the multiplier</li>
+                <li><i class="bi bi-check2-all"></i>The multiplicand is added to the partial product upon encountering
+                  the first 0 (provided that there was a previous '1') in a string of 0's in the multiplier.</li>
+                <li><i class="bi bi-check2-all"></i> The partial product does not change when the multiplier bit is
+                  identical to the previous multiplier bit.</li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row row gy-4" data-aos="fade-up" data-aos-delay="300" style="margin-left: 10px;">
+        <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300"></div>
+        <p> AC and the appended bit Qn+1 are initially cleared to 0 and the sequence SC is set to a number n equal to
+          the number of bits in the multiplier. The two bits of the multiplier in Qn and Qn+1are inspected. If the two
+          bits are equal to 10, it means that the first 1 in a string has been encountered. This requires subtraction of
+          the multiplicand from the partial product in AC. If the 2 bits are equal to 01, it means that the first 0 in a
+          string of 0's has been encountered. This requires the addition of the multiplicand to the partial product in
+          AC. When the two bits are equal, the partial product does not change. An overflow cannot occur because the
+          addition and subtraction of the multiplicand follow each other. As a consequence, the 2 numbers that are added
+          always have a opposite signs, a condition that excludes an overflow. The next step is to shift right the
+          partial product and the multiplier (including Qn+1). This is an arithmetic shift right (ashr) operation which
+          AC and QR to the right and leaves the sign bit in AC unchanged. The sequence counter is decremented and the
+          computational loop is repeated n times. Product of negative numbers is important, while multiplying negative
+          numbers we need to find 2's complement of the number to change its sign, because it's easier to add instead of
+          performing binary subtraction. product of two negative number is demonstrated below along with 2's complement.
+        </p>
+      </div>
+      </div>
+    </section>
+  </main>
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="row gy-3">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <i class="bi bi-person icon"></i>
+          <div>
+            <h4>Developer </h4>
+            <p>
+              Patel Dhruv N.<br>
+              21CS041<br>
+            </p>
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links d-flex">
+          <i class="bi bi-envelope icon"></i>
+          <div>
+            <h4>Contact</h4>
+            <p>
+              <strong>Email:</strong>21cs041@charusat.edu.in<br>
+            </p>
+          </div>
+        </div>
+
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Follow Me</h4>
+          <div class="social-links d-flex">
+            <a href="https://www.linkedin.com/in/dhruv-patel-209828228/" class="linkedin"><i
+                class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/Dhruvpatel004" class="github"><i class="bi bi-github"></i></a>
+            <a href="https://www.instagram.com/_dhruv__patel._/?igshid=ZDdkNTZiNTM%3D" class="instagram"><i
+                class="bi bi-instagram"></i></a>
+            <a href="https://twitter.com/Patel__Dhruv_" class="twitter"><i class="bi bi-twitter"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>21CS041</span></strong>. All Rights Reserved
+      </div>
+    </div>
+
+  </footer>
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <div id="preloader"></div>
+
+  <script>
+    function run() {
+      var tableHeaderRowCount = 2;
+      var table = document.getElementById('mytable');
+      var rowCount = table.rows.length;
+      for (var i = tableHeaderRowCount; i < rowCount; i++) {
+        table.deleteRow(tableHeaderRowCount);
+      }
+
+
+      let ans = document.getElementById("ans");
+      ans.style.display = "block";
+      let n1 = document.getElementById("n1");
+      let n2 = document.getElementById("n2");
+      console.log(n1.value);
+      console.log(n2.value);
+      var span = document.getElementById("multiplicand");
+      span.textContent = n1.value;
+      var span1 = document.getElementById("multiplier");
+      span1.textContent = n2.value;
+
+
+      let bn1 = n1.value;
+      let bn2 = n2.value;
+      booth_multiplication(bn1, bn2)
+    }
+
+  </script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="booth.js"></script>
+  <script src="assets/js/main.js"></script>
+
+
+</body>
+
+</html>
